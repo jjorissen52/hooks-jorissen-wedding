@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block home_content %}
+{% block content %}
     <!-- Header -->
     <a name="about"></a>
     <div class="intro-header">
   
         <div class="container">
-    <div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>Lauren &amp; Tom</h1>
-                        <h3>3rd September 2016,</h3>
-                        <h3>Colville Hall,</h3>
-                        <h3>Ceremony begins 2pm.</h3>
-                        {% include '_buttons.html' %}
+            <div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="intro-message">
+                            <h1>{{ event.couple }}</h1>
+                            <h3>{{ event.date|date }}</h3>
+                            <h3>{{ event.venue }}</h3>
+                            <h3>Ceremony begins {{ event.start|date:"g:i A" }}</h3>
+                            {% include '_buttons.html' %}
                         
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /.container -->
 
     </div>
     <!-- /.intro-header -->
-
     <!-- Page Content -->
 
 	<a  name="services"></a>
@@ -58,7 +56,7 @@
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading"><a target="_self" href="/venue">Awesome Hall</a></h2>
+                    <h2 class="section-heading"><a target="_self" href="/venue">{{ venue }}</a></h2>
                     <p class="lead">We are lucky to be one of the first couples to marry at Awesome Hall. Situated in the picturesque location of Amazing Town, Awesome Hall is an historic venue and features the country's only remaining Grade One listed court house. <a target="_self" href="/venue">find directions and more details here</a>.
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
@@ -93,4 +91,4 @@
 
     </div>
     <!-- /.content-section-a -->
-{% endblock home_content %}
+{% endblock content %}

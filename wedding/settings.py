@@ -9,7 +9,8 @@ config.read(os.path.join(BASE_DIR, 'settings.cfg'))
 SECRET_KEY = config.get('django', 'secret_key')
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
-ALLOWED_HOSTS = ['nrkhfl8q0i.execute-api.us-east-2.amazonaws.com']
+ALLOWED_HOSTS = ['grtdnkzt69.execute-api.us-east-2.amazonaws.com',
+                 'hooks-jorissen.com']
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -26,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'wedding',
+    'phonenumber_field',
+    'markupfield'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +54,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wedding.context_processors.event',
+                'wedding.context_processors.debug'
             ],
         },
     },

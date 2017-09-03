@@ -9,7 +9,7 @@ config.read(os.path.join(BASE_DIR, 'settings.cfg'))
 SECRET_KEY = config.get('django', 'secret_key')
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nrkhfl8q0i.execute-api.us-east-2.amazonaws.com']
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -43,7 +43,7 @@ ROOT_URLCONF = 'wedding.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,3 +100,5 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 STATICFILES_STORAGE = 'wedding.custom_storages.StaticStorage'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

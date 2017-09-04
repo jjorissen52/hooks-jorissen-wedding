@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from wedding.views import HomeTemplateView, ContactTemplateView, VenueTemplateView
+from wedding.views import HomeTemplateView, ContactTemplateView, VenueTemplateView, FoodTemplateView, GiftsTemplateView
 
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),
@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^$', lambda request: HttpResponseRedirect(reverse('Home')), name='index'),
     url(r'^contact/$', ContactTemplateView.as_view(), name='Contact'),
     url(r'^venue/$', VenueTemplateView.as_view(), name='Venue'),
+    url(r'^food/$', FoodTemplateView.as_view(), name='Food'),
+    url(r'^gifts/$', GiftsTemplateView.as_view(), name='Gifts'),
 ]

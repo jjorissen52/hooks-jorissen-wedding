@@ -11,3 +11,11 @@ class ContactTemplateView(TemplateView):
 
 class VenueTemplateView(TemplateView):
     template_name = "venue.html"
+
+
+class FoodTemplateView(TemplateView):
+    template_name = "food.html"
+
+
+class GiftsTemplateView(TemplateView):
+    template_name = "gifts.html"

@@ -1,2 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 settings.cfg
+zappa_settings.json
+.idea/
+static/favicons/browserconfig.xml
+wedding/__pycache__/
+wedding/management/__pycache__/
+wedding/management/commands/__pycache__/
+wedding/migrations/__pycache__/

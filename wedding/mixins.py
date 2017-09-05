@@ -33,3 +33,25 @@ class PictureAble(models.Model):
 
     class Meta:
         abstract = True
+
+
+class DescribeAble(models.Model):
+    description = MarkupField(default="No Description Provided", default_markup_type='markdown')
+
+    class Meta:
+        abstract = True
+
+
+class AttachAble(models.Model):
+    PAGE_CHOICES = (
+        ('Home', 'Home'),
+        ('Food', 'Food'),
+        ('Contact', 'Contact'),
+        ('Gifts', 'Gifts'),
+        ('Venue', 'Venue'),
+        ('RSVP', 'RSVP'),
+    )
+    page = models.CharField(default='Home', max_length=10, choices=PAGE_CHOICES)
+
+    class Meta:
+        abstract = True

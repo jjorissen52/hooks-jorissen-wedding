@@ -56,6 +56,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'wedding.context_processors.event',
                 'wedding.context_processors.backgrounds',
+                'wedding.context_processors.content',
                 'wedding.context_processors.debug'
             ],
         },

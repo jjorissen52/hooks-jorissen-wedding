@@ -4,19 +4,10 @@ from django.db import models
 from djmoney.models.fields import MoneyField
 from markupfield.fields import MarkupField
 
-from wedding.mixins import NameAble, LocateAble, ScheduleAble, PictureAble
+from wedding.mixins import NameAble, LocateAble, ScheduleAble, PictureAble, DescribeAble, AttachAble
 
 
-class BackgroundPhoto(NameAble, PictureAble, models.Model):
-    PAGE_CHOICES = (
-        ('Home', 'Home'),
-        ('Food', 'Food'),
-        ('Contact', 'Contact'),
-        ('Gifts', 'Gifts'),
-        ('Venue', 'Venue'),
-        ('RSVP', 'RSVP'),
-    )
-    page = models.CharField(default='Home', max_length=10, choices=PAGE_CHOICES)
+class BackgroundPhoto(NameAble, PictureAble, AttachAble, models.Model):
 
     def __str__(self):
         return f'{self.picture.file}'
@@ -31,7 +22,7 @@ class Event(ScheduleAble, models.Model):
         return f'{self.couple} at {self.venue} on {self.date}'
 
 
-class Venue(NameAble, LocateAble, PictureAble, models.Model):
+class Venue(NameAble, LocateAble, PictureAble, DescribeAble, models.Model):
     ALCOHOL_OPTIONS = (
         ('0', 'Alcohol provider of choice'),
         ('1', 'Alcohol provided by venue'),
@@ -43,7 +34,6 @@ class Venue(NameAble, LocateAble, PictureAble, models.Model):
         ('1', 'Must choose from approved caterers'),
         ('2', 'Any caterer is fine')
     )
-    description = MarkupField(default="No Description Provided")
 
     # moneys
     base_price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -59,3 +49,11 @@ class Venue(NameAble, LocateAble, PictureAble, models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Content(NameAble, PictureAble, DescribeAble, AttachAble, models.Model):
+
+    def __str__(self):
+        return f'{self.name}'
+
+

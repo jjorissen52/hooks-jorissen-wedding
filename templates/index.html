@@ -33,55 +33,20 @@
     <!-- /.intro-header -->
     <!-- Page Content -->
 	<a  name="services"></a>
-    <div class="content-section-a">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Fifteen years in the making</h2>
-                    <p class="lead">The relationship status update that echoed through Facebook is true! Yes, Tom <em>finally</em> popped the question. They say good things come to those who wait...</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="{% static "img/ohdear.jpg" %}" />
-                </div>
-            </div>
-        </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.content-section-a -->
-    <div class="content-section-b">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading"><a target="_self" href="/venue">{{ venue }}</a></h2>
-                    <p class="lead">We are lucky to be one of the first couples to marry at Awesome Hall. Situated in the picturesque location of Amazing Town, Awesome Hall is an historic venue and features the country's only remaining Grade One listed court house. <a target="_self" href="/venue">find directions and more details here</a>.
-                </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="{% static "img/22.png" %}" />
+    {% for content in contents.Home %}
+        <div class="content-section-{% cycle 'a' 'b' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="{% cycle "col-lg-5 col-sm-6" "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" %}">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        {{ content.description.rendered|safe }}
+                    </div>
+                    <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
+                        <img class="img-responsive" src="{{ content.image }}" />
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.content-section-b -->
-    <div class="content-section-a">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading"><a target="_self" href="/food">Wedding breakfast</a></h2>
-                    <p class="lead"><b>Food!</b> The most important part of the day...except for perhaps the ceremony itself. Maybe. We love food and as you'd expect, have spent a lot of time deciding the options and waging the age old battle of <em>foam vs volute</em>. </p> <p class="lead"> We hope you'll love them, <a target="_self" href="/food">review your options here</a> and <a href="http://goo.gl/forms/QKoGv3ZJKx">select them here</a>.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="{% static "img/food3.jpg" %}" />
-                </div>
-            </div>
-        </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.content-section-a -->
+    {% endfor %}
 {% endblock content %}

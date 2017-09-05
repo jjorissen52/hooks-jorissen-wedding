@@ -1,6 +1,6 @@
 import sys
 from django.conf import settings
-from wedding.models import Event, BackgroundPhoto
+from wedding.models import Event, BackgroundPhoto, Content
 
 
 def event(request):
@@ -15,11 +15,28 @@ def backgrounds(request):
     background_photo_objs = BackgroundPhoto.objects.all()
     background_photos = {}
     for photo in background_photo_objs:
-        print(settings.AWS_S3_CUSTOM_DOMAIN)
         background_photos[photo.page] = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/' \
                                         f'{settings.AWS_LOCATION}/{photo.picture.file}'
-        print(background_photos)
     return {"background_photos": background_photos}
+
+
+def content(request):
+    content_objs = Content.objects.all().order_by('pk')
+    contents = {}
+    for content in content_objs:
+        if content.page in contents.keys():
+            contents[content.page].append(
+                {"description": content.description, "name": content.name,
+                 "image": f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/'
+                          f'{content.picture.file}'}
+            )
+        else:
+            contents[content.page] = [
+                {"description": content.description, "name": content.name,
+                 "image": f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/'
+                          f'{content.picture.file}'}
+            ]
+    return {"contents": contents}
 
 
 def debug(request):

@@ -26,3 +26,10 @@ class ScheduleAble(models.Model):
 
     class Meta:
         abstract = True
+
+
+class PictureAble(models.Model):
+    picture = models.FileField(upload_to="uploaded_photos", blank=True, null=True)
+
+    class Meta:
+        abstract = True

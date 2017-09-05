@@ -30,67 +30,8 @@ h6 {
     font-weight: 400;
 }
 
-.intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    background: url(../img/IMG_3378.jpg) no-repeat center center;
-
-    background-size: cover;
-}
-
-.intro-header1 {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-     /* background: url(https://media.giphy.com/media/K0k6Oxh8whEFW/giphy.gif) no-repeat center center;
-   background: url(../img/banner-bg2.png) no-repeat center center;*/
-   /* background: url(https://media.giphy.com/media/LVBH3rg1BUROw/giphy.gif) no-repeat center center; */
-   background: url(../img/gift.jpg) no-repeat center center;
-   
-    background-size: cover;
-}
 
 
-
-.intro-header_gifts {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-     /* background: url(https://media.giphy.com/media/K0k6Oxh8whEFW/giphy.gif) no-repeat center center;
-   background: url(../img/banner-bg2.png) no-repeat center center;*/
-   /* background: url(https://media.giphy.com/media/LVBH3rg1BUROw/giphy.gif) no-repeat center center; */
-   background: url(../img/gift.jpg) no-repeat center center;
-   
-    background-size: cover;
-}
-
-
-.intro-header4 {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-     /* background: url(https://media.giphy.com/media/K0k6Oxh8whEFW/giphy.gif) no-repeat center center;
-   background: url(../img/banner-bg2.png) no-repeat center center;*/
-   /* background: url(https://media.giphy.com/media/LVBH3rg1BUROw/giphy.gif) no-repeat center center; */
-   background: url(../img/13015070_10156849630745425_659042390_n.jpg) no-repeat center center;
-   
-    background-size: cover;
-}
-
-
-.intro-header_venue {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-     background: url(../img/IMG_3902.jpg) no-repeat center center;
-    background-size: cover;
-}
 
 
 .intro-message {

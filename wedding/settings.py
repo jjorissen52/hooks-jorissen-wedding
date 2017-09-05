@@ -55,6 +55,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'wedding.context_processors.event',
+                'wedding.context_processors.backgrounds',
                 'wedding.context_processors.debug'
             ],
         },
@@ -100,6 +101,7 @@ AWS_ACCESS_KEY_ID = config.get('aws', 'access_key_id')
 AWS_SECRET_ACCESS_KEY = config.get('aws', 'secret_access_key')
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_STORAGE_BUCKET_NAME = config.get('aws', 'storage_bucket_name')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 

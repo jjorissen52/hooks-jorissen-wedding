@@ -14,20 +14,26 @@
                             <h3>{{ event.venue }}</h3>
                             <h3>Ceremony begins {{ event.start|date:"g:i A" }}</h3>
                             {% include '_buttons.html' %}
-                        
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+    <style>
+    .intro-header {
+        padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+        padding-bottom: 50px;
+        text-align: center;
+        color: #f8f8f8;
+        background: url({{ background_photos.Home }}) no-repeat center center;
+        background-size: cover;
+    }
+    </style>
     <!-- /.intro-header -->
     <!-- Page Content -->
-
 	<a  name="services"></a>
     <div class="content-section-a">
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-sm-6">
@@ -40,17 +46,12 @@
                     <img class="img-responsive" src="{% static "img/ohdear.jpg" %}" />
                 </div>
             </div>
-
         </div>
         <!-- /.container -->
-
     </div>
     <!-- /.content-section-a -->
-
     <div class="content-section-b">
-
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
@@ -62,17 +63,12 @@
                     <img class="img-responsive" src="{% static "img/22.png" %}" />
                 </div>
             </div>
-
         </div>
         <!-- /.container -->
-
     </div>
     <!-- /.content-section-b -->
-
     <div class="content-section-a">
-
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
@@ -84,10 +80,8 @@
                     <img class="img-responsive" src="{% static "img/food3.jpg" %}" />
                 </div>
             </div>
-
         </div>
         <!-- /.container -->
-
     </div>
     <!-- /.content-section-a -->
 {% endblock content %}

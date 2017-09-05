@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
     <a name="about"></a>
-    <div class="intro-header_venue">
+    <div class="venue-header">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
@@ -12,12 +11,18 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /.container -->
-
     </div>
-    <!-- /.intro-header -->
+    <style>
+        .venue-header {
+            padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+            padding-bottom: 50px;
+            text-align: center;
+            color: #f8f8f8;
+             background: url({{ background_photos.Venue }}) no-repeat center center;
+            background-size: cover;
+        }
+    </style>
 
     <!-- Page Content -->
 

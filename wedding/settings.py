@@ -8,7 +8,8 @@ config.read(os.path.join(BASE_DIR, 'settings.cfg'))
 
 SECRET_KEY = config.get('django', 'secret_key')
 
-DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
+# DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
+DEBUG = True
 ALLOWED_HOSTS = ['grtdnkzt69.execute-api.us-east-2.amazonaws.com',
                  'hooks-jorissen.com']
 

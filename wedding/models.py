@@ -17,7 +17,6 @@ class BackgroundPhoto(NameAble, PictureAble, AttachAble, models.Model):
 
 class Event(ScheduleAble, models.Model):
     couple = models.CharField(max_length=100, blank=False, null=False)
-    date = models.DateField(default=datetime.now)
     venue = models.ForeignKey('wedding.Venue', null=True, blank=True)
 
     def __str__(self):

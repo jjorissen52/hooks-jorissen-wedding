@@ -13,6 +13,11 @@
                             <h3>{{ event.date|date }}</h3>
                             <h3>{{ event.venue }}</h3>
                             <h3>Ceremony begins {{ event.start|date:"g:i A" }}</h3>
+                            <p>
+                                {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                    <a class="btn btn-info" href="{% url 'admin:wedding_event_change' event.pk %}" target="_blank">Edit Event</a>
+                                {% endif %}
+                            </p>
                             {% include '_buttons.html' %}
                         </div>
                     </div>
@@ -33,6 +38,9 @@
     <!-- /.intro-header -->
     <!-- Page Content -->
 	<a  name="services"></a>
+    {% if request.user.is_superuser or request.user.is_staff or debug %}
+        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}">Add Content</a></h1>
+    {% endif %}
     {% for content in contents.Home %}
         <div class="content-section-{% cycle 'a' 'b' %}">
             <div class="container">
@@ -41,6 +49,11 @@
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
                         {{ content.description.rendered|safe }}
+                        <p>
+                            {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
+                            {% endif %}
+                        </p>
                     </div>
                     <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
                         <img class="img-responsive" src="{{ content.image }}" />

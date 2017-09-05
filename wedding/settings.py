@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'storages',
     'wedding',
     'phonenumber_field',
-    'markupfield'
+    'markupfield',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

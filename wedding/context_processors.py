@@ -24,18 +24,11 @@ def content(request):
     content_objs = Content.objects.all().order_by('pk')
     contents = {}
     for content in content_objs:
+        content.image = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/{content.picture.file}'
         if content.page in contents.keys():
-            contents[content.page].append(
-                {"description": content.description, "name": content.name,
-                 "image": f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/'
-                          f'{content.picture.file}'}
-            )
+            contents[content.page].append(content)
         else:
-            contents[content.page] = [
-                {"description": content.description, "name": content.name,
-                 "image": f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/'
-                          f'{content.picture.file}'}
-            ]
+            contents[content.page] = [content]
     return {"contents": contents}
 
 

@@ -30,28 +30,30 @@
     <!-- Page Content -->
 
 	<a  name="services"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Contact information</h2>
-                    <p class="lead">Whilst you may have Tom or Lauren's numbers we'll list a new one that will call the happy couple similtaneously, likewise you can find single contact numbers for the bridal party, caterers and more!</p>
-                    <ul>
-                    <li>Happy couple</li>
-                    <li>Bridal party</li>
-                    <li>Venue</li>
-                    <li>Catering team</li>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="{% static 'img/320379_10151876685945571_1550131728_n.jpg' %}" alt="">
+    {% if request.user.is_superuser or request.user.is_staff or debug %}
+        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}">Add Content</a></h1>
+    {% endif %}
+    {% for content in contents.Contact %}
+        <div class="content-section-{% cycle 'a' 'b' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="{% cycle "col-lg-5 col-sm-6" "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" %}">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        {{ content.description.rendered|safe }}
+                        <p>
+                            {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
+                        <img class="img-responsive" src="{{ content.image }}" />
+                    </div>
                 </div>
             </div>
-
         </div>
-        <!-- /.container -->
+    {% endfor %}
 
     </div>
 {% endblock content %}

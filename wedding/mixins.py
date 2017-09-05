@@ -65,7 +65,7 @@ class PublishAble(models.Model):
 
 
 class RankAble(models.Model):
-    rank = models.PositiveSmallIntegerField()
+    rank = models.PositiveSmallIntegerField(help_text='Lower is better.')
 
     class Meta:
         abstract = True

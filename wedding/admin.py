@@ -7,6 +7,15 @@ from wedding.models import Event, Venue, BackgroundPhoto, Content
 admin.site.unregister(User)
 
 
+def make_published(modeladmin, request, queryset):
+    queryset.update(is_published=True)
+make_published.short_description = "Publish Selected"
+
+
+def unmake_published(modeladmin, request, queryset):
+    queryset.update(is_published=False)
+unmake_published.short_description = "Un-Publish Selected"
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
 
@@ -53,9 +62,11 @@ class BackgroundPhotoAdmin(admin.ModelAdmin):
 class ContentAdmin(admin.ModelAdmin):
     Model = Content
     _ordered_fields = [field.name for field in Model._meta.get_fields()]
-    _excluded_fields = ['_description_rendered']
+    _excluded_fields = ['_description_rendered', 'picture']
     _fields = {field.name for field in Model._meta.get_fields()} - {*_excluded_fields}
     list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
-    list_display_links = ['id']
+    list_display_links = ['id', 'name']
     _fields -= {*list_display_links}
     list_editable = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
+    list_filter = ['page', 'rank']
+    actions = [make_published, unmake_published]

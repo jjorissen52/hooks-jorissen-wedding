@@ -33,136 +33,29 @@
     </style>
     <!-- /.intro-header -->
 
-<a  name="services"></a>
-    <div class="content-section-a">
-    <p class="lead">If you have already decided your options, <a href="https://goo.gl/forms/QKoGv3ZJKx" target="_self">enter them here</a>, otherwise view the menu below!</p>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Starters, entrées, entrada</h2>
-                <p class="lead">This is where it all begins....</p>
-                <p class="lead">Cod Arancini</p>
-                <ul>
-                    <li>Baby Gem Lettuce,</li>
-                    <li>Black Garlic &amp; Aubergine Puree,</li>
-                    <li>Aioli</li>
-                </ul>
-
-                <p class="lead">Duck liver parfait</p>
-                <ul>
-                    <li>Fig gel &amp; thyme brioche</li>
-                </ul></p>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="{% static "img/starters.png" %}" alt="">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="content-section-a">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Mains</h2>
-                    <p class="lead">We thought that the mains should reflect the venue, but please let us know if you cannot eat red meat (even if you are not a vegetarian).
-                    <p class="lead">Roast Sirloin</p>
-                    <ul>
-                        <li>Potato pavé with bacon,</li>
-                        <li>Onion purée,</li>
-                        <li>yellow &amp; red baby beetroot,</li>
-                        <li>Curly kale &amp; red wine sauce.</li>
-                    </ul>
-                    <p class="lead">Braised shoulder of Lamb</p>
-                    <ul>
-                        <li>Confit carrot,</li>
-                        <li>Potato mash,</li>
-                        </li>Green beans finished with lamb stock sauce.</li>
-                    </ul>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="{% static "img/mains3.png" %}" alt="">
+    <a  name="services"></a>
+    {% if request.user.is_superuser or request.user.is_staff or debug %}
+        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}">Add Content</a></h1>
+    {% endif %}
+    {% for content in contents.Food %}
+        <div class="content-section-{% cycle 'b' 'a' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="{% cycle "col-lg-5 col-sm-6" "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" %}">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        {{ content.description.rendered|safe }}
+                        <p>
+                            {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
+                        <img class="img-responsive" src="{{ content.image }}" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /.container -->
-
-
-    <div class="content-section-a">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Desserts</h2>
-                <p class="lead">For some of the party (<em>Lauren</em>), this is the main event. Is there such a thing as refined gluttony? Finish off the wedding breakfast with either of these delightful options.</p><p class="lead">
-
-                Chocolate Selection</p>
-<ul>
-<li>Milk Chocolate &amp; Orange Torte</li>
-<li>White Chocolate Mousse with Chocolate Crumb</li>
-<li>Chocolate Pistachio Fudge</li>
-</ul>
-
-<p class="lead">Vanilla Cheesecake</p>
-
-<ul>
-<li>Pear Compote, </li>
-<li>Hazelnut &amp; Candied Ginger Crumb.</li>
-</ul>
-
-
-            </div>
-
-<div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <img class="img-responsive" src="{% static "img/desserts.png" %}" alt="">
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
-
-<div class="content-section-b">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-
-<h2 class="section-heading">Children</h2>
-<p class="lead">
-                  The main kids meal will be served with the adult starters and will be chicken goujons, chips and peas. Their dessert will be a chocolate brownie and will be served with the adult main course.
-                  </p></div>
-                  </div>
-                  </div>
-                  </div>
-</div>
-
- <div class="content-section-b">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-<h2 class="section-heading">Decisions, decisions!</h2>
-<p class="lead">Tough choice eh? <a href="https://goo.gl/forms/QKoGv3ZJKx" target="_self">Select your option here</a>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    {% endfor %}
 {% endblock content %}

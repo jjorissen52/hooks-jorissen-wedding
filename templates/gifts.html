@@ -32,23 +32,28 @@
     <!-- Page Content -->
 
     <a  name="services"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Gifts</h2>
-                    <p class="lead">Tom and Lauren are looking forward to some rest and relaxation after the exquisite chaos that is planning a Wedding. Though not required, any contributions to the Honeymoon will be greatly appreciated. You can also view our gift list by<a href="">  entering Gift List number 1234567 on this page</a>.</p>
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="{% static "img/IMG_0002.JPG" %}" alt="">
+    {% if request.user.is_superuser or request.user.is_staff or debug %}
+        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}">Add Content</a></h1>
+    {% endif %}
+    {% for content in contents.Gifts %}
+        <div class="content-section-{% cycle 'b' 'a' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="{% cycle "col-lg-5 col-sm-6" "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" %}">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        {{ content.description.rendered|safe }}
+                        <p>
+                            {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
+                        <img class="img-responsive" src="{{ content.image }}" />
+                    </div>
                 </div>
             </div>
-
         </div>
-        <!-- /.container -->
-
-    </div>
+    {% endfor %}
 {% endblock content %}

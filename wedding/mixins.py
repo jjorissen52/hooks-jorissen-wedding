@@ -55,3 +55,17 @@ class AttachAble(models.Model):
 
     class Meta:
         abstract = True
+
+
+class PublishAble(models.Model):
+    is_published = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
+
+
+class RankAble(models.Model):
+    rank = models.PositiveSmallIntegerField()
+
+    class Meta:
+        abstract = True

@@ -34,103 +34,71 @@
     <!-- Page Content -->
 
 	<a  name="services"></a>
-    <div class="content-section-a">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-6">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">{{ event.venue }}</h2>
-
-                    <p class="lead">
-                        Awesome Hall lies within the remains of an ancient moated site, containing several medieval and post medieval timber framed and thatched barns and other traditional farm structures originally used by a wealthy farmstead.
-
+    {% if request.user.is_superuser or request.user.is_staff or debug %}
+        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}">Add Content</a></h1>
+    {% endif %}
+    {% if venue.display_description %}
+        <div class="content-section-a">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-6">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        {{ venue.description.rendered|safe }}
+                        <p>
+                            {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                <a class="btn btn-info" href="{% url 'admin:wedding_venue_change' venue.pk %}" target="_blank">Edit Venue</a>
+                            {% endif %}
                         </p>
- <p class="lead">
-                         Awesome Hall is steeped in history. It is still possible to see where the original moat runs which pre dates most of the existing farmstead and can be seen as a large dry ditch and shallow depression and a further part is perpetuated as one of the ponds. Roman artefacts were collected by former farmer Robert Judd at Colville Hall in 1846 – these dated from the 1st to the 4th centuries AD - and included coins dating from Emperors Nero to Gratian, burial urns, oil lamps and some unusually designed metal keys.
-
-                         </p>
-
-                    <p class="lead">
-                    This is a <b>no smoking venue</b> as the site features thatched buildings and so they prefer guests to avoid setting them on fire...
-                    </p>
-                        <p class="lead">{{ event.venue }}</p>
-                        <div class="container">
-                            {{ venue.address.rendered|safe }}
+                    </div>
+                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                        <img class="img-responsive" src="{{ venue.picture }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% for content in contents.Venue %}
+            <div class="content-section-{% cycle 'b' 'a' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="{% cycle "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" "col-lg-5 col-sm-6" %}">
+                            <hr class="section-heading-spacer">
+                            <div class="clearfix"></div>
+                            {{ content.description.rendered|safe }}
+                            <p>
+                                {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                    <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
+                                {% endif %}
+                            </p>
                         </div>
-                    </p>
-
-                </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="static/img/IMG_3378.jpg" alt="">
-
-
-                </div>
-
-                   <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="static/img/directions.png" alt="">
-                </div>
-
-
-            </div>
-
-        </div>
-    </div>
-
-
-     <div class="content-section-b">
-
-        <div class="container">
-
-            <div class="row">
-               <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Hotels &amp; Parking</h2>
-                    <p class="lead">There are a range of hotels near the venue, Awesome Hall has collated a list <a href="" target="_self">on their website</a>.</p>
-                    <p class="lead">There is ample parking at the venue, cars can be left overnight (at owners risk) but cars must be collected by <b>11am on the 4th</b>.</p>
-                </div>
-                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="static/img/IMG_3952.jpg" alt="">
+                        <div class="{% cycle "col-lg-5 col-sm-pull-6  col-sm-6" "col-lg-5 col-lg-offset-2 col-sm-6" %}">
+                            <img class="img-responsive" src="{{ content.image }}" />
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-
-    <div class="content-section-a">
-
-        <div class="container">
-
-            <div class="row">
-                   <div class="col-lg-5 col-sm-6">
-
-
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <h2 class="section-heading">Children</h2>
-                    <p class="lead">
-                    Children are welcome at our Wedding, we will make every effort to secure high chairs and entertainment but if you have specific needs (or ideas!) please let us know.
-                    </p>
-                      <p class="lead">
-                      The main kids meal will be served with the adult starters and will be chicken goujons, chips and peas. Their dessert will be a chocolate brownie and will be served with the adult main course.
-                      </p>
-                </div>
-                  <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="static/img/fam2.png" alt="">
+        {% endfor %}
+    {% else %}
+        {% for content in contents.Venue %}
+            <div class="content-section-{% cycle 'a' 'b' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="{% cycle "col-lg-5 col-sm-6" "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" %}">
+                            <hr class="section-heading-spacer">
+                            <div class="clearfix"></div>
+                            {{ content.description.rendered|safe }}
+                            <p>
+                                {% if request.user.is_superuser or request.user.is_staff or debug %}
+                                    <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
+                            <img class="img-responsive" src="{{ content.image }}" />
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-
-        <!-- /.container -->
-
-    </div>
+        {% endfor %}
+    {% endif %}
 {% endblock content %}

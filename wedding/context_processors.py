@@ -21,10 +21,13 @@ def backgrounds(request):
 
 
 def content(request):
-    content_objs = Content.objects.all().order_by('pk')
+    content_objs = Content.objects.published()
     contents = {}
     for content in content_objs:
-        content.image = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/{content.picture.file}'
+        try:
+            content.image = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/{content.picture.file}'
+        except ValueError:
+            pass
         if content.page in contents.keys():
             contents[content.page].append(content)
         else:

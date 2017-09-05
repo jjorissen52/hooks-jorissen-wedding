@@ -45,27 +45,7 @@
 </head>
 
 <body>
-
-    {% if request.user.is_superuser or request.user.is_staff or debug %}
-        <a class="btn btn-info" id="adminbutton" href="{% url "admin:index" %}" target="_blank">Admin Panel</a>
-        <a class="btn btn-info" id="edit-background" href="{% url "admin:wedding_backgroundphoto_changelist" %}" target="_blank">
-            Add/Edit Background Images
-        </a>
-        <style>
-            #adminbutton {
-                position: fixed;
-                top: 15px;
-                right: 15px;
-                z-index: 9999;
-            }
-            #edit-background {
-                position: absolute;
-                top: 15px;
-                left: 15px;
-                z-index: 9999;
-            }
-        </style>
-    {% endif %}
+    {% include '_navbar.html' %}
 
     {% block content %}{% endblock content %}
 

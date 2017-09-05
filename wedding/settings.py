@@ -112,3 +112,5 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 STATICFILES_STORAGE = 'wedding.custom_storages.StaticStorage'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+LOGOUT_REDIRECT_URL = "/home"

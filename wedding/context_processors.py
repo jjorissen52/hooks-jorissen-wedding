@@ -1,6 +1,6 @@
 import sys
 from django.conf import settings
-from wedding.models import Event, BackgroundPhoto, Content
+from wedding.models import Event, BackgroundPhoto, Content, Venue
 
 
 def event(request):
@@ -8,6 +8,7 @@ def event(request):
     events = Event.objects.all().order_by('-pk')
     if events:
         event, venue = events[0], events[0].venue
+        venue.image = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/{venue.picture.file}'
     return {"event": event, "venue": venue, "debug": settings.DEBUG}
 
 

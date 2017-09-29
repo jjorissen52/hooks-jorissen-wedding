@@ -35,7 +35,7 @@
 
 	<a  name="services"></a>
     {% if request.user.is_superuser or request.user.is_staff or debug %}
-        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}">Add Content</a></h1>
+        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}"  target="_blank">Add Content</a></h1>
     {% endif %}
     {% if venue.display_description %}
         <div class="content-section-a">
@@ -52,7 +52,7 @@
                         </p>
                     </div>
                     <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                        <img class="img-responsive" src="{{ venue.picture }}" />
+                        <img class="img-responsive" src="{{ venue.image }}" />
                     </div>
                 </div>
             </div>

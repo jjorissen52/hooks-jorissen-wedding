@@ -5,7 +5,7 @@ from django.conf import settings
 
 
 class Command(BaseCommand):
-    help = 'Adds a schema to the database.'
+    help = 'Drogs a schema from the database'
 
     def handle(self, *args, **options):
 

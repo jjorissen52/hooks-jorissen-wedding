@@ -8,9 +8,9 @@ config.read(os.path.join(BASE_DIR, 'settings.cfg'))
 
 SECRET_KEY = config.get('django', 'secret_key')
 
-# DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
+DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 DEBUG = True
-ALLOWED_HOSTS = ['grtdnkzt69.execute-api.us-east-2.amazonaws.com',
+ALLOWED_HOSTS = ['xuxftb03m3.execute-api.us-east-1.amazonaws.com',
                  'hooks-jorissen.com']
 
 if DEBUG:
@@ -99,13 +99,13 @@ USE_TZ = True
 # STATIC_URL = '/static/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_LOCATION = 'content'
-AWS_S3_HOST = "s3.us-east-2.amazonaws.com"
-AWS_ACCESS_KEY_ID = config.get('aws', 'access_key_id')
-AWS_SECRET_ACCESS_KEY = config.get('aws', 'secret_access_key')
+AWS_S3_HOST = "s3.us-east-1.amazonaws.com"
+AWS_ACCESS_KEY_ID = config.get('corrdyn', 'access_key_id')
+AWS_SECRET_ACCESS_KEY = config.get('corrdyn', 'secret_access_key')
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_STORAGE_BUCKET_NAME = config.get('aws', 'storage_bucket_name')
+AWS_STORAGE_BUCKET_NAME = config.get('corrdyn', 'storage_bucket_name')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN

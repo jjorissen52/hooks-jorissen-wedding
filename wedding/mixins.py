@@ -13,7 +13,7 @@ class NameAble(models.Model):
 
 
 class LocateAble(models.Model):
-    phone = PhoneNumberField()
+    phone = models.CharField(max_length=10, null=True, blank=True)
     address = MarkupField(default="No Address Provided")
 
     class Meta:

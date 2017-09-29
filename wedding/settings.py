@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'markupfield',
     'django_extensions',
+    'zappa_django_utils'
 ]
 
 MIDDLEWARE = [
@@ -68,13 +69,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wedding.wsgi.application'
 
 
-CURRENT_SCHEMA = config.get('lambda', 'db_schema')
+SCHEMA = config.get('lambda', 'db_schema')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'OPTIONS': {
-            'options': f'-c search_path={CURRENT_SCHEMA}'
+            'options': f'-c search_path={SCHEMA}'
         },
         'NAME': config.get('lambda', 'db_name'),
         'USER': config.get('lambda', 'db_user'),
@@ -84,6 +85,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     "default": {
+#         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "db",
+#         "USER": "",
+#         "PASSWORD": "",
+#         "HOST": "",
+#         "PORT": "",
+#     }
+# }
 
 
 LANGUAGE_CODE = 'en-us'

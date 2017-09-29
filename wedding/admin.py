@@ -38,9 +38,10 @@ class EventAdmin(admin.ModelAdmin):
 class VenueAdmin(admin.ModelAdmin):
     Model = Venue
     _ordered_fields = [field.name for field in Model._meta.get_fields()]
-    _excluded_fields = ['event', '_address_rendered', '_description_rendered']
+    _excluded_fields = ['event', '_address_rendered', '_description_rendered', 'description']
     _fields = {field.name for field in Model._meta.get_fields()} - {*_excluded_fields}
-    list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
+    # list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
+    list_display = ['id', 'name', 'phone', 'picture', 'display_description']
     list_display_links = ['id']
     _fields -= {*list_display_links}
     list_editable = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
@@ -62,7 +63,7 @@ class BackgroundPhotoAdmin(admin.ModelAdmin):
 class ContentAdmin(admin.ModelAdmin):
     Model = Content
     _ordered_fields = [field.name for field in Model._meta.get_fields()]
-    _excluded_fields = ['_description_rendered', 'picture']
+    _excluded_fields = ['_description_rendered', 'description']
     _fields = {field.name for field in Model._meta.get_fields()} - {*_excluded_fields}
     list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
     list_display_links = ['id', 'name']

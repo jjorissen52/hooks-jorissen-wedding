@@ -20,7 +20,7 @@ class Event(ScheduleAble, models.Model):
     venue = models.ForeignKey('wedding.Venue', null=True, blank=True)
 
     def __str__(self):
-        return f'{self.couple} at {self.venue} on {self.date}'
+        return f'{self.couple} at {self.venue} on {self.start}'
 
 
 class Venue(NameAble, LocateAble, PictureAble, DescribeAble, RankAble, models.Model):

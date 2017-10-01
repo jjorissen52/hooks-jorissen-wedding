@@ -14,7 +14,7 @@ ALLOWED_HOSTS = ['1a3f3x15jf.execute-api.us-east-1.amazonaws.com',
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 
-# DEBUG = False
+DEBUG = False
 # Application definition
 INSTALLED_APPS = [
     'jet',
@@ -82,17 +82,17 @@ DATABASES = {
     }
 }
 
-DATABASES = {
-    "default": {
-        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "db",
-        "USER": "",
-        "PASSWORD": "",
-        "HOST": "",
-        "PORT": "",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "db",
+#         "USER": "",
+#         "PASSWORD": "",
+#         "HOST": "",
+#         "PORT": "",
+#     }
+# }
 
 
 LANGUAGE_CODE = 'en-us'

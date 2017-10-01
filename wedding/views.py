@@ -6,7 +6,7 @@ from wedding.models import Page, Content
 
 
 def index_view(request):
-    pages = Page.objects.all()
+    pages = Page.objects.all().order_by('-pk')
     # for page in pages:
     #     page.image = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/{venue.picture.file}'
     return render(request, template_name='index.html', context={"pages": pages})

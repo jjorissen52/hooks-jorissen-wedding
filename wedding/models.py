@@ -13,7 +13,7 @@ class BaseBackground(NameAble, PictureAble, RankAble):
     pass
 
 
-class Page(NameAble, PictureAble, DescribeAble, models.Model):
+class Page(NameAble, PictureAble, DescribeAble, RankAble, models.Model):
     slug = models.CharField(max_length=100, unique=True, blank=True)
     header = models.CharField(max_length=100)
 
@@ -53,12 +53,16 @@ class Venue(NameAble, LocateAble, PictureAble, DescribeAble, RankAble, models.Mo
 
 
 class Content(NameAble, PictureAble, DescribeAble, RankAble, PublishAble, models.Model):
-    header = models.CharField(max_length=100)
+    header = models.CharField(max_length=100, blank=True)
     page = models.ForeignKey('Page')
     objects = PublishedManager()
 
     def __str__(self):
         return f'{self.name}'
+
+    def save(self, *args, **kwargs):
+        self.header = self.header if self.header else self.name
+        return super(Content, self).save(*args, **kwargs)
 
 
 

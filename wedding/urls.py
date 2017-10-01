@@ -12,7 +12,7 @@ urlpatterns = [
     # the names of the urls need to be capitalized; they are used in the page title
     # url(r'^home/$', HomeTemplateView.as_view(), name='Home'),
     url(r'^home/$', index_view, name='home'),
-    url(r'^page/(?P<slug>\w{0,50})/$', page_view, name='page'),
+    url(r'^page/(?P<slug>[a-zA-z-]{0,100})/$', page_view, name='page'),
     url(r'^$', lambda request: HttpResponseRedirect(reverse('home')), name='index'),
     url(r'^logout/$', lambda request: HttpResponseRedirect(reverse('admin:logout')), name='logout'),
     url(r'^login/$', lambda request: HttpResponseRedirect(reverse('admin:login')), name='login'),

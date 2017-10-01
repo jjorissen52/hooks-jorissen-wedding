@@ -15,6 +15,7 @@ if DEBUG:
     ALLOWED_HOSTS = ["*"]
 
 DEBUG = False
+
 # Application definition
 INSTALLED_APPS = [
     'jet',

@@ -18,4 +18,4 @@ def base_background(request):
 
 
 def pages(request):
-    return {"pages": Page.objects.all()}
+    return {"pages": Page.objects.all().order_by('-pk')}

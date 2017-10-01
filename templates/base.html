@@ -21,14 +21,7 @@
 			</header>
 
 		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="{% url "home" %}">Home</a></li>
-                    {% for page in pages %}
-                        <li><a href="{% url "page" page.slug %}">{{ page.name }}</a></li>
-                    {% endfor %}
-				</ul>
-			</nav>
+			{% include "nav.html" %}
 
 		<!-- Banner -->
 		<!--

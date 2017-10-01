@@ -19,7 +19,8 @@ the background image.
             </div>
             {% if request.user.is_superuser or request.user.is_staff %}
                 <footer>
-                    <a class="button alt" href="{% url 'admin:wedding_content_change' event.pk %}" target="_blank">Edit Content</a>
+                    <a class="button alt" href="{% url 'admin:wedding_content_add' %}" target="_blank">Add Content</a>
+                    <a class="button alt" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
                 </footer>
             {% endif %}
         </article>

@@ -28,7 +28,13 @@
         <a href="#one" class="more scrolly">Learn More</a>
     </section>
     {% for page in pages %}
-    <section id="{{ page.pk }}" class="wrapper post" style="background-image: url({{ page.picture.url }});">
+        {% if page.picture %}
+            {% with page.picture.url as pic_url %}
+                <section id="{{ page.pk }}" class="wrapper post" style="background-image: url({{ pic_url }});">
+            {% endwith %}
+        {% else %}
+            <section id="{{ page.pk }}" class="wrapper post" style="background-image: url();">
+        {% endif %}
         <div class="inner">
             <article class="box">
                 <header>

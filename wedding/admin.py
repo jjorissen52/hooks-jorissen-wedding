@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from wedding.models import Event, Venue, BackgroundPhoto, Content
+from wedding.models import Event, Venue, Page, Content, BaseBackground
 
 admin.site.unregister(User)
 
@@ -44,14 +44,26 @@ class VenueAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'phone', 'picture', 'display_description']
     list_display_links = ['id']
     _fields -= {*list_display_links}
+    # list_editable = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
+
+
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    Model = Page
+    _ordered_fields = [field.name for field in Model._meta.get_fields()]
+    _excluded_fields = ['_description_rendered', 'content']
+    _fields = {field.name for field in Model._meta.get_fields()} - {*_excluded_fields}
+    list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
+    list_display_links = ['id']
+    _fields -= {*list_display_links}
     list_editable = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
 
 
-@admin.register(BackgroundPhoto)
-class BackgroundPhotoAdmin(admin.ModelAdmin):
-    Model = BackgroundPhoto
+@admin.register(BaseBackground)
+class BaseBackground(admin.ModelAdmin):
+    Model = BaseBackground
     _ordered_fields = [field.name for field in Model._meta.get_fields()]
-    _excluded_fields = []
+    _excluded_fields = ['_description_rendered', 'content']
     _fields = {field.name for field in Model._meta.get_fields()} - {*_excluded_fields}
     list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
     list_display_links = ['id']
@@ -63,7 +75,7 @@ class BackgroundPhotoAdmin(admin.ModelAdmin):
 class ContentAdmin(admin.ModelAdmin):
     Model = Content
     _ordered_fields = [field.name for field in Model._meta.get_fields()]
-    _excluded_fields = ['_description_rendered', 'description']
+    _excluded_fields = ['_description_rendered', 'description', ]
     _fields = {field.name for field in Model._meta.get_fields()} - {*_excluded_fields}
     list_display = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
     list_display_links = ['id', 'name']

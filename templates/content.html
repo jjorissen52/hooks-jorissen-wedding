@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Content -->
+<!--
+Note: To show a background image, set the "data-bg" attribute below
+to the full filename of your image. This is used in each section to set
+the background image.
+-->
+{% for content in contents %}
+<section id="post" class="wrapper" style="background-image: url({{ content.picture.url }});">
+    <div class="inner">
+        <article class="box">
+            <header>
+                <h2>{{ content.header }}</h2>
+            </header>
+            <div class="content">
+                {{ content.description }}
+            </div>
+            {% if request.user.is_superuser or request.user.is_staff %}
+                <footer>
+                    <a class="button alt" href="{% url 'admin:wedding_content_change' event.pk %}" target="_blank">Edit Content</a>
+                </footer>
+            {% endif %}
+        </article>
+    </div>
+</section>
+{% endfor %}
+{% endblock %}

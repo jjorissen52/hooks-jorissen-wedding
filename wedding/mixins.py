@@ -42,21 +42,6 @@ class DescribeAble(models.Model):
         abstract = True
 
 
-class AttachAble(models.Model):
-    PAGE_CHOICES = (
-        ('Home', 'Home'),
-        ('Food', 'Food'),
-        ('Contact', 'Contact'),
-        ('Gifts', 'Gifts'),
-        ('Venue', 'Venue'),
-        ('RSVP', 'RSVP'),
-    )
-    page = models.CharField(default='Home', max_length=10, choices=PAGE_CHOICES)
-
-    class Meta:
-        abstract = True
-
-
 class PublishAble(models.Model):
     is_published = models.BooleanField(default=True)
 

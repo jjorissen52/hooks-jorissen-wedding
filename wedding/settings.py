@@ -11,12 +11,11 @@ SECRET_KEY = config.get('django', 'secret_key')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 ALLOWED_HOSTS = ['1a3f3x15jf.execute-api.us-east-1.amazonaws.com',
                  'hooks-jorissen.com']
-
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
 
+# DEBUG = False
 # Application definition
-
 INSTALLED_APPS = [
     'jet',
     'django.contrib.admin',
@@ -57,9 +56,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'wedding.context_processors.event',
-                'wedding.context_processors.backgrounds',
-                'wedding.context_processors.content',
-                'wedding.context_processors.debug'
+                'wedding.context_processors.base_background',
+                'wedding.context_processors.pages',
             ],
         },
     },
@@ -84,17 +82,17 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": "db",
-#         "USER": "",
-#         "PASSWORD": "",
-#         "HOST": "",
-#         "PORT": "",
-#     }
-# }
+DATABASES = {
+    "default": {
+        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    }
+}
 
 
 LANGUAGE_CODE = 'en-us'
@@ -119,8 +117,10 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_STORAGE_BUCKET_NAME = config.get('corrdyn', 'storage_bucket_name')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+# STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 STATICFILES_STORAGE = 'wedding.custom_storages.StaticStorage'
+
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 

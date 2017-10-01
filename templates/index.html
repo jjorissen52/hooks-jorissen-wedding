@@ -1,65 +1,46 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <!-- Header -->
-    <a name="about"></a>
-    <div class="intro-header">
-        <div class="container">
-            <div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="intro-message">
-                            <h1>{{ event.couple }}</h1>
-                            <h3>{{ event.start|date }}</h3>
-                            <h3>{{ event.venue }}</h3>
-                            <h3>Ceremony begins {{ event.start|date:"g:i A" }}</h3>
-                            <p>
-                                {% if request.user.is_superuser or request.user.is_staff or debug %}
-                                    <a class="btn btn-info" href="{% url 'admin:wedding_event_change' event.pk %}" target="_blank">Edit Event</a>
-                                {% endif %}
-                            </p>
-                            {% include '_buttons.html' %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <section id="banner" style="background-image: url({{ base_background.picture.url }});">
+        <div class="inner">
+            <header>
+                <h1>{{ event.couple }}</h1>
+                <h3>{{ event.start|date }}</h3>
+                <h3>{{ event.venue }}</h3>
+                <h3>Ceremony begins {{ event.start|date:"g:i A" }}</h3>
+                <h2></h2>
+            </header>
+            {% if request.user.is_superuser or request.user.is_staff %}
+            <article class="box">
+                <footer>
+                    <a class="button alt" href="{% url 'admin:wedding_event_change' event.pk %}" target="_blank">Edit Event</a>
+                    <a class="button alt" href="{% url 'admin:wedding_page_add' %}" target="_blank">Add Page</a>
+                </footer>
+            </article>
+            {% endif %}
         </div>
-    </div>
-    <style>
-    .intro-header {
-        padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-        padding-bottom: 50px;
-        text-align: center;
-        color: #f8f8f8;
-        background: url({{ background_photos.Home }}) no-repeat center center;
-        background-size: cover;
-    }
-    </style>
-    <!-- /.intro-header -->
-    <!-- Page Content -->
-	<a  name="services"></a>
-    {% if request.user.is_superuser or request.user.is_staff or debug %}
-        <h1 style="text-align: center;"><a class="btn btn-info" href="{% url "admin:wedding_content_add" %}"  target="_blank">Add Content</a></h1>
-    {% endif %}
-    {% for content in contents.Home %}
-        <div class="content-section-{% cycle 'a' 'b' %}">
-            <div class="container">
-                <div class="row">
-                    <div class="{% cycle "col-lg-5 col-sm-6" "col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6" %}">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        {{ content.description.rendered|safe }}
-                        <p>
-                            {% if request.user.is_superuser or request.user.is_staff or debug %}
-                                <a class="btn btn-info" href="{% url 'admin:wedding_content_change' content.pk %}" target="_blank">Edit Content</a>
-                            {% endif %}
-                        </p>
-                    </div>
-                    <div class="{% cycle "col-lg-5 col-lg-offset-2 col-sm-6" "col-lg-5 col-sm-pull-6  col-sm-6" %}">
-                        <img class="img-responsive" src="{{ content.image }}" />
-                    </div>
+        <a href="#one" class="more scrolly">Learn More</a>
+    </section>
+    {% for page in pages %}
+    <section id="{{ page.pk }}" class="wrapper post" style="background-image: url({{ page.picture.url }});">
+        <div class="inner">
+            <article class="box">
+                <header>
+                    <h2>{{ page.header }}</h2>
+                </header>
+                <div class="content">
+                    {{ page.description|safe }}
                 </div>
-            </div>
+                <br>
+                <footer>
+                    <a href="{% url "page" page.slug %}" class="button alt">Learn More</a>
+                    {% if request.user.is_superuser or request.user.is_staff %}
+                        <a class="button alt" href="{% url 'admin:wedding_page_change' page.pk %}" target="_blank">Edit Page</a>
+                    {% endif %}
+                </footer>
+            </article>
         </div>
+    </section>
     {% endfor %}
-{% endblock content %}
+{% endblock %}

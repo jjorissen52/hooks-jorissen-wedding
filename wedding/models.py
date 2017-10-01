@@ -5,14 +5,24 @@ from djmoney.models.fields import MoneyField
 from markupfield.fields import MarkupField
 
 from wedding.managers import PublishedManager
-from wedding.mixins import NameAble, LocateAble, ScheduleAble, PictureAble, DescribeAble, AttachAble, RankAble, \
+from wedding.mixins import NameAble, LocateAble, ScheduleAble, PictureAble, DescribeAble, RankAble, \
     PublishAble
 
 
-class BackgroundPhoto(NameAble, PictureAble, AttachAble, models.Model):
+class BaseBackground(NameAble, PictureAble, RankAble):
+    pass
+
+
+class Page(NameAble, PictureAble, DescribeAble, models.Model):
+    slug = models.CharField(max_length=100, unique=True, blank=True)
+    header = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.picture.file}'
+        return f'{self.name}'
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug.lower() if self.slug else '-'.join(self.name.lower().split(' '))
+        return super(Page, self).save(*args, **kwargs)
 
 
 class Event(ScheduleAble, models.Model):
@@ -36,29 +46,20 @@ class Venue(NameAble, LocateAble, PictureAble, DescribeAble, RankAble, models.Mo
         ('2', 'Any caterer is fine')
     )
 
-    # moneys
-    base_price = models.DecimalField(max_digits=6, decimal_places=2)
-    price_per_hour = models.DecimalField(max_digits=6, decimal_places=2)
-
-    # logistics
-    allotted_hours = models.PositiveSmallIntegerField()
-    capacity = models.PositiveSmallIntegerField()
-    alcohol_situation = models.CharField(max_length=1, default=1, choices=ALCOHOL_OPTIONS)
-    alcohol_pricing = models.TextField(default='')
-    food_situation = models.CharField(max_length=1, default=1, choices=FOOD_OPTIONS)
-    logistics_comments = models.TextField(default='')
-
     display_description = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.name}'
 
 
-class Content(NameAble, PictureAble, DescribeAble, AttachAble, RankAble, PublishAble, models.Model):
-
+class Content(NameAble, PictureAble, DescribeAble, RankAble, PublishAble, models.Model):
+    header = models.CharField(max_length=100)
+    page = models.ForeignKey('Page')
     objects = PublishedManager()
 
     def __str__(self):
         return f'{self.name}'
+
+
 
 

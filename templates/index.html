@@ -14,8 +14,13 @@
             {% if request.user.is_superuser or request.user.is_staff %}
             <article class="box">
                 <footer>
-                    <a class="button alt" href="{% url 'admin:wedding_event_change' event.pk %}" target="_blank">Edit Event</a>
                     <a class="button alt" href="{% url 'admin:wedding_page_add' %}" target="_blank">Add Page</a>
+                    <a class="button alt" href="{% url 'admin:wedding_basebackground_add' %}" target="_blank">Add Banner</a>
+                    {% if event %}
+                        <a class="button alt" href="{% url 'admin:wedding_event_change' event.pk %}" target="_blank">Edit Event</a>
+                    {% else %}
+                        <a class="button alt" href="{% url 'admin:wedding_event_add' %}" target="_blank">Add Event</a>
+                    {% endif %}
                 </footer>
             </article>
             {% endif %}

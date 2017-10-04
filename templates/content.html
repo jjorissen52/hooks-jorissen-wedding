@@ -8,7 +8,13 @@ to the full filename of your image. This is used in each section to set
 the background image.
 -->
 {% for content in contents %}
-<section id="post" class="wrapper" style="background-image: url({{ content.picture.url }});">
+    {% if content.picture %}
+        {% with content.picture.url as url %}
+            <section id="post" class="wrapper" style="background-image: url({{ content.picture.url }});">
+        {% endwith %}
+    {% else %}
+        <section id="post" class="wrapper">
+    {% endif %}
     <div class="inner">
         <article class="box">
             <header>

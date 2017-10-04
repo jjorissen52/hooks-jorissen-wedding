@@ -16,6 +16,7 @@ def unmake_published(modeladmin, request, queryset):
     queryset.update(is_published=False)
 unmake_published.short_description = "Un-Publish Selected"
 
+
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
 
@@ -47,6 +48,11 @@ class VenueAdmin(admin.ModelAdmin):
     # list_editable = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
 
 
+class ContentInline(admin.TabularInline):
+    model = Content
+    extra = 0
+
+
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     Model = Page
@@ -57,6 +63,7 @@ class PageAdmin(admin.ModelAdmin):
     list_display_links = ['id']
     _fields -= {*list_display_links}
     list_editable = list(filter(lambda x, _fields=_fields: x in _fields, _ordered_fields))
+    inlines = [ContentInline]
 
 
 @admin.register(BaseBackground)

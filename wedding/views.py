@@ -14,7 +14,7 @@ def index_view(request):
 
 def page_view(request, slug):
     try:
-        page = Page.objects.get(slug=slug).order_by('rank')
+        page = Page.objects.get(slug=slug)
         contents = Content.objects.filter(page=page).order_by('rank')
         if not contents:
             raise Http404

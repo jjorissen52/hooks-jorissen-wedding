@@ -83,17 +83,17 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": "db",
-#         "USER": "",
-#         "PASSWORD": "",
-#         "HOST": "",
-#         "PORT": "",
-#     }
-# }
+DATABASES = {
+    "default": {
+        # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    }
+}
 
 
 LANGUAGE_CODE = 'en-us'

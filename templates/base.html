@@ -16,9 +16,18 @@
 
 		<!-- Header -->
 			<header id="header">
-				<div class="logo"><a href="{% url "home" %}">Wedding Home</a></div>
+				<div class="logo"><a id="brand" href="{% url "home" %}" style="height: 10px;">Wedding Home</a></div>
 				<a href="#menu"><span>Menu</span></a>
 			</header>
+        <style>
+            #brand {
+                background-color:black;
+                z-index:0;
+                opacity:0.5;
+                margin: 2px 10px 2px 10px;
+                height: 10px;
+            }
+        </style>
 
 		<!-- Nav -->
 			{% include "nav.html" %}

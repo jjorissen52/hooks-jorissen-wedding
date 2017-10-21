@@ -10,7 +10,7 @@ config.read(os.path.join(BASE_DIR, 'settings.cfg'))
 SECRET_KEY = config.get('django', 'secret_key')
 
 ALLOWED_HOSTS = ['1a3f3x15jf.execute-api.us-east-1.amazonaws.com',
-                 'hooks-jorissen.com']
+                 'hooks-jorissen.us']
 
 try:
     HOSTNAME = socket.gethostname()

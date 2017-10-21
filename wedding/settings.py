@@ -1,5 +1,6 @@
 import os
 import configparser
+import socket
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -8,13 +9,13 @@ config.read(os.path.join(BASE_DIR, 'settings.cfg'))
 
 SECRET_KEY = config.get('django', 'secret_key')
 
-DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 ALLOWED_HOSTS = ['1a3f3x15jf.execute-api.us-east-1.amazonaws.com',
                  'hooks-jorissen.com']
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
 
-DEBUG = False
+try:
+    HOSTNAME = socket.gethostname()
+except:
+    HOSTNAME = 'localhost'
 
 # Application definition
 INSTALLED_APPS = [
@@ -83,19 +84,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": "db",
-#         "USER": "",
-#         "PASSWORD": "",
-#         "HOST": "",
-#         "PORT": "",
-#     }
-# }
-
-
 LANGUAGE_CODE = 'en-us'
 
 USE_I18N = True
@@ -119,10 +107,41 @@ AWS_STORAGE_BUCKET_NAME = config.get('corrdyn', 'storage_bucket_name')
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 # STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-STATICFILES_STORAGE = 'wedding.custom_storages.StaticStorage'
 
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGOUT_REDIRECT_URL = "/home"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config.get('email', 'email_user')
+EMAIL_HOST_PASSWORD = config.get('email', 'email_password')
+DEFAULT_FROM_EMAIL = config.get('email', 'email_user')
+CONTACT_FORM_RECIPIENT_LIST = ['jjorissen52@gmail.com', 'sarahlhooks@gmail.com']
+
+
+if config.get('local', 'host_name') in HOSTNAME:
+    DATABASES = {
+        "default": {
+            # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": "db",
+            "USER": "",
+            "PASSWORD": "",
+            "HOST": "",
+            "PORT": "",
+        }
+    }
+
+    ALLOWED_HOSTS = ["*"]
+    DEBUG = True
+
+else:
+    STATICFILES_STORAGE = 'wedding.custom_storages.StaticStorage'
+
+# STATICFILES_STORAGE = 'wedding.custom_storages.StaticStorage'

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section id="post" class="wrapper" style="background-image: url({% static "images/thanks.jpg" %});">
+    <div class="inner">
+        <article class="box" style="text-align: center;">
+            <header>
+                <h2>Thanks!</h2>
+            </header>
+            <div class="content">
+                We'll respond to you message soon!
+            </div>
+            <br>
+            <footer>
+                <a class="button alt" href="{% url 'home' %}">Return to Site</a>
+            </footer>
+        </article>
+    </div>
+</section>
+{% endblock content %}

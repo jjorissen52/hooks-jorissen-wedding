@@ -1,15 +1,17 @@
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
+from wedding.forms import ContactForm
 from wedding.models import Page, Content
 
 
 def index_view(request):
     pages = Page.objects.all().order_by('rank')
+    contact_form = ContactForm()
     # for page in pages:
     #     page.image = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{settings.AWS_LOCATION}/{venue.picture.file}'
-    return render(request, template_name='index.html', context={"pages": pages})
+    return render(request, template_name='index.html', context={"pages": pages, "contact_form": contact_form})
 
 
 def page_view(request, slug):
@@ -22,6 +24,22 @@ def page_view(request, slug):
         raise Http404
 
     return render(request, template_name='content.html', context={"contents": contents})
+
+
+class ContactFormView(FormView):
+    template_name = 'thanks.html'
+    form_class = ContactForm
+    success_url = '../thanks/'
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super(ContactFormView, self).form_valid(form)
+
+
+class ThanksView(TemplateView):
+    template_name = 'thanks.html'
 
 
 class HomeTemplateView(TemplateView):

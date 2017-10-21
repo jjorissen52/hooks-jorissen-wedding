@@ -7,6 +7,7 @@ Note: To show a background image, set the "data-bg" attribute below
 to the full filename of your image. This is used in each section to set
 the background image.
 -->
+<div class="spaces"><br><br></div>
 {% for content in contents %}
     {% if content.picture %}
         {% with content.picture.url as url %}
@@ -33,4 +34,11 @@ the background image.
     </div>
 </section>
 {% endfor %}
+<style>
+@media (min-width: 482px){
+    .spaces{
+        display:none;
+    }
+}
+</style>
 {% endblock %}

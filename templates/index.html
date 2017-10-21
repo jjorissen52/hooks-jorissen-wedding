@@ -25,8 +25,9 @@
             </article>
             {% endif %}
         </div>
-        <a href="#one" class="more scrolly">Learn More</a>
+        <a href="#content" class="more scrolly">Learn More</a>
     </section>
+    <a id="content"></a>
     {% for page in pages %}
         {% if page.picture %}
             {% with page.picture.url as pic_url %}
